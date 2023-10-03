@@ -11,16 +11,14 @@ services:
       - /var/lib/docker/volumes/storage/unixsherpa-invoiceninja/nginx/in-vhost.conf:/etc/nginx/conf.d/in-vhost.conf:ro
       - ./docker/app/public:/var/www/app/public:ro
     depends_on:
-      - app
+      - app-invoiceninja
     # Run webserver nginx on port 80
     # Feel free to modify depending what port is already occupied
     ports:
       - "8880:80"
       #- "443:443"
-    networks:
-      - invoiceninja
 
-  app:
+  app-invoiceninja:
     image: invoiceninja/invoiceninja:5
     env_file: env
     restart: always
@@ -29,9 +27,3 @@ services:
       - ./docker/app/storage:/var/www/app/storage:rw,delegated
       - /var/lib/docker/volumes/storage/unixsherpa-invoiceninja/config/php/php.ini:/usr/local/etc/php/php.ini
       - /var/lib/docker/volumes/storage/unixsherpa-invoiceninja/config/php/php-cli.ini:/usr/local/etc/php/php-cli.ini
-
-    networks:
-      - invoiceninja
-
-networks:
-  invoiceninja:
