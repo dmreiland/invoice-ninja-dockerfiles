@@ -8,7 +8,7 @@ services:
     volumes:
       # Vhost configuration
       #- ./config/caddy/Caddyfile:/etc/caddy/Caddyfiledocker-com
-      - ./config/nginx/in-vhost.conf:/etc/nginx/conf.d/in-vhost.conf:ro
+      - ${STORAGE_ROOT}/nginx/in-vhost.conf:/etc/nginx/conf.d/in-vhost.conf:ro
       - ./docker/app/public:/var/www/app/public:ro
     depends_on:
       - app
@@ -27,8 +27,8 @@ services:
     volumes:
       - ./docker/app/public:/var/www/app/public:rw,delegated
       - ./docker/app/storage:/var/www/app/storage:rw,delegated
-      - ./config/php/php.ini:/usr/local/etc/php/php.ini
-      - ./config/php/php-cli.ini:/usr/local/etc/php/php-cli.ini
+      - ${STORAGE_ROOT}/config/php/php.ini:/usr/local/etc/php/php.ini
+      - ${STORAGE_ROOT}/config/php/php-cli.ini:/usr/local/etc/php/php-cli.ini
 
     networks:
       - invoiceninja
