@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  server:
+  server-loyaltyfirstllc:
     image: nginx
     restart: always
     env_file: env
@@ -11,14 +11,14 @@ services:
       - /var/lib/docker/volumes/storage/loyaltyfirstllc-invoiceninja/nginx/in-vhost.conf:/etc/nginx/conf.d/in-vhost.conf:ro
       - ./docker/app/public:/var/www/app/public:ro
     depends_on:
-      - app-invoiceninja
+      - app-invoiceninja-loyaltyfirstllc
     # Run webserver nginx on port 80
     # Feel free to modify depending what port is already occupied
     ports:
       - "8881:80"
       #- "443:443"
 
-  app-invoiceninja:
+  app-invoiceninja-loyaltyfirstllc:
     image: invoiceninja/invoiceninja:5
     env_file: env
     restart: always
